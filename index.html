@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="status" id="status"></div>
+    
+    <div class="container">
+        <div class="section ai-section">
+            <div class="section-title">
+                <img src="/icons/splitlogo.png" alt="Split" class="logo">
+            </div>
+            <div class="input-group">
+                <label>describe what you want to do...</label>
+                <textarea id="aiPrompt" placeholder="e.g., 'crop to instagram story format', 'add contrast and blur background', 'focus on the face and crop to portrait 9:16', 'select subject and copy to new layer'"></textarea>
+            </div>
+            <button id="aiAnalyzeBtn" class="ai-button">Analyze & Apply</button>
+        </div>
+
+        <div class="section response-section" id="responseSection" style="display: none;">
+            <div class="section-title">AI Response</div>
+            <div id="aiResponse" class="ai-response"></div>
+            <div class="button-row">
+                <button id="executeBtn" class="execute-button">Execute Changes</button>
+                <button id="cancelBtn" class="cancel-button">Cancel</button>
+            </div>
+        </div>
+        <!--
+        <div class="section">
+            <div class="section-title collapsible" id="manualToggle">
+                Manual Controls
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div id="manualControls" style="display: none;">
+                <div class="subsection">
+                    <div class="subsection-title">Subject Selection</div>
+                    <button id="selectSubjectBtn">Select Subject & Copy to New Layer</button>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">Crop</div>
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label>Width (px)</label>
+                            <input type="number" id="cropWidth" value="1920" min="1">
+                        </div>
+                        <div class="input-group">
+                            <label>Height (px)</label>
+                            <input type="number" id="cropHeight" value="1080" min="1">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Position</label>
+                        <select id="cropPosition">
+                            <option value="" selected>-- Select position --</option>
+                            <option value="center">Center</option>
+                            <option value="top">Top</option>
+                            <option value="bottom">Bottom</option>
+                            <option value="left">Left</option>
+                            <option value="right">Right</option>
+                        </select>
+                    </div>
+                    <button id="cropBtn">Apply Crop</button>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">Resize</div>
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label>Width (px)</label>
+                            <input type="number" id="resizeWidth" value="1920" min="1">
+                        </div>
+                        <div class="input-group">
+                            <label>Height (px)</label>
+                            <input type="number" id="resizeHeight" value="1080" min="1">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Interpolation</label>
+                        <select id="resizeMethod">
+                            <option value="" selected>-- Select method --</option>
+                            <option value="bicubic">Bicubic (Best)</option>
+                            <option value="bilinear">Bilinear</option>
+                            <option value="nearestNeighbor">Nearest Neighbor</option>
+                            <option value="bicubicSharper">Bicubic Sharper</option>
+                        </select>
+                    </div>
+                    <button id="resizeBtn">Apply Resize</button>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">Blur</div>
+                    <div class="input-group">
+                        <label>Blur Type</label>
+                        <select id="blurType">
+                            <option value="" selected>-- Select blur type --</option>
+                            <option value="gaussian">Gaussian Blur</option>
+                            <option value="motion">Motion Blur</option>
+                            <option value="radial">Radial Blur</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Radius</label>
+                        <div class="slider-container">
+                            <input type="range" id="blurRadius" min="0.1" max="250" step="0.1" value="5">
+                            <span class="slider-value" id="blurRadiusValue">5</span>
+                        </div>
+                    </div>
+                    <div class="input-group" id="motionAngleGroup" style="display: none;">
+                        <label>Angle (degrees)</label>
+                        <div class="slider-container">
+                            <input type="range" id="motionAngle" min="0" max="360" step="1" value="0">
+                            <span class="slider-value" id="motionAngleValue">0</span>
+                        </div>
+                    </div>
+                    <button id="blurBtn">Apply Blur</button>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">Color Correction</div>
+                    <div class="input-group">
+                        <label>Brightness</label>
+                        <div class="slider-container">
+                            <input type="range" id="brightness" min="-150" max="150" step="1" value="0">
+                            <span class="slider-value" id="brightnessValue">0</span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Contrast</label>
+                        <div class="slider-container">
+                            <input type="range" id="contrast" min="-50" max="100" step="1" value="0">
+                            <span class="slider-value" id="contrastValue">0</span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Saturation</label>
+                        <div class="slider-container">
+                            <input type="range" id="saturation" min="-100" max="100" step="1" value="0">
+                            <span class="slider-value" id="saturationValue">0</span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Temperature</label>
+                        <div class="slider-container">
+                            <input type="range" id="temperature" min="-100" max="100" step="1" value="0">
+                            <span class="slider-value" id="temperatureValue">0</span>
+                        </div>
+                    </div>
+                    <button id="colorBtn">Apply Color Correction</button>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">Sharpness</div>
+                    <div class="input-group">
+                        <label>Amount (%)</label>
+                        <div class="slider-container">
+                            <input type="range" id="sharpness" min="0.1" max="500" step="0.1" value="100">
+                            <span class="slider-value" id="sharpnessValue">100</span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Radius (px)</label>
+                        <div class="slider-container">
+                            <input type="range" id="sharpnessRadius" min="0.1" max="250" step="0.1" value="1">
+                            <span class="slider-value" id="sharpnessRadiusValue">1.0</span>
+                        </div>
+                    </div>
+                    <button id="sharpnessBtn">Apply Sharpness</button>
+                </div>
+            </div>
+        </div> 
+        -->
+    </div>
+
+    <div class="footer">
+        powered by 6ix7even for Innovative4AI
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{
+  "manifestVersion": 5,
+  "id": "split-ai",
+  "name": "SPLIT AI for PS",
+  "version": "1.0.0",
+  "main": "index.html",
+  "host": {
+    "app": "PS",
+    "minVersion": "24.0.0"
+  },
+  "entrypoints": [
+    {
+      "type": "panel",
+      "id": "panel1",
+      "minimumSize": {
+        "width": 280,
+        "height": 400
+      },
+      "maximumSize": {
+        "width": 800,
+        "height": 1200
+      },
+      "preferredDockedSize": {
+        "width": 320,
+        "height": 500
+      },
+      "preferredFloatingSize": {
+        "width": 340,
+        "height": 550
+      }
+    }
+  ],
+  "requiredPermissions": {
+    "network": {
+      "domains": [
+        "https://generativelanguage.googleapis.com"
+      ]
+    }
+  }
+}
