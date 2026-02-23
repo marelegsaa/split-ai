@@ -19,6 +19,7 @@ async function performResize(params) {
     }, { commandName: "AI Resize" });
 }
 
+
 async function performCrop(params) {
     await executeAsModal(async () => {
         const doc = app.activeDocument;
