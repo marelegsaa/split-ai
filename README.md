@@ -225,4 +225,4 @@ This project is licensed under the **Apache License 2.0** — see the [LICENSE](
 
 ## Acknowledgments
 
-Built during **Adobe Innovate4AI Hackathon** in 48 hours in Bucharest. Special thanks to the **Bucharest event team** for hosting, mentorship, and valuable insights that shaped the direction of this project.
+Built during **Adobe Innovate4AI Hackathon** in 48 hours in Bucharest. Special thanks to the **Adobe Team** for hosting, mentorship, and valuable insights that shaped the direction of this project.
